@@ -8,6 +8,6 @@
 - 任务格式为 `.todo`，需要在 `Sublime` 安装插件 `Plain Tasks`
 - `Plain Tasks` 时间格式需要修改一下，位于 `Preferences -> Package Settings -> PlainTasks -> Settings User`
     
-    {
-      "date_format": "(%Y-%m-%d %H:%M)",
-    }
+        {
+          "date_format": "(%Y-%m-%d %H:%M)",
+        }
