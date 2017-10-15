@@ -22,10 +22,11 @@
   ☐ 修复博客部分 bugs
     ✔ 目录下拉会重新计算定位：再 toficy.js 里面修改 extendPage: false @done (2017-10-14 13:17)
     ✔ 增加微信大赏功能、支付宝大赏功能 @done (2017-10-14 13:17)
-    ☐ 修复代码块多有空行的问题
+    ✔ 修复代码块多有空行的问题 @done (17-10-15 11:01)
     ✔ 解决 Rmd 文件生成 html 的代码识别问题，在 @done (2017-10-14 16:56)
       ✔ `src/static/dist/even.min.js`，使用 Javascript 查找 getElementByTagName('pre')，找到 o2=e2[n].className，然后增加 `language-` @done (2017-10-14 16:56)
       ✔ `src/static/dist/even.min.css`，增加 `language-r` 的显示格式 @done (2017-10-14 16:56)
+    ✔ 增加对 ToC 的识别，允许部分短文章不需要设置文章目录 @done (17-10-15 11:04)
   ☐ 期货持仓：数据下载
     ✔ CFFEX @done (2017-10-13 17:48)
     ✔ CZCE @done (2017-10-13 17:48)
