@@ -21,9 +21,14 @@
       ✔ 部分原始文件通过网站无法访问，需要使用页面爬虫技术 @done (2017-10-16 14:37)
     ✔ SHFE @done (2017-10-17 10:33)
     ✔ DCE @done (2017-10-17 10:33)
-      ☐ DCE 有一公网资源页面，里面有大量的数据：www.dce.com.cn/publicweb
+      ✔ DCE 有一公网资源页面，里面有大量的数据：www.dce.com.cn/publicweb @done (2017-10-18 10:57)
+      ✔ 部分页面识别会出现卡顿，需要增加缓冲时间 @done (2017-10-18 10:57)
 
   oiRank:
+    ✔ CFFEX @done (2017-10-18 10:56)
+    ✔ CZCE @done (2017-10-18 10:57)
+    ☐ DCE
+    ✔ SHFE @done (2017-10-18 10:57)
 
 Linux:
   ✔ python 脚本里面运行 Linux 系统命令，而且需要使用 root 权限，可以设置。比如，需要使用 root 权限来校准系统时间： @done (2017-10-17 17:14)
@@ -47,9 +52,8 @@ Linux:
       ✔ `src/static/dist/even.min.js`，使用 Javascript 查找 getElementByTagName('pre')，找到 o2=e2[n].className，然后增加 `language-` @done (2017-10-14 16:56)
       ✔ `src/static/dist/even.min.css`，增加 `language-r` 的显示格式 @done (2017-10-14 16:56)
     ✔ 增加对 ToC 的识别，允许部分短文章不需要设置文章目录 @done (17-10-15 11:04)
-  ☐ 期货持仓：数据下载
-    ✔ CFFEX @done (2017-10-13 17:48)
-    ✔ CZCE @done (2017-10-13 17:48)
-    ☐ DCE
-    ✔ SHFE @done (2017-10-13 17:49)
-   ☐ 期货持仓：数据分析
+   ☐ 交易所数据爬虫
+     ✔ 中金所 @done (2017-10-18 10:58)
+     ☐ 郑商所
+     ☐ 大商所
+     ☐ 上期所
