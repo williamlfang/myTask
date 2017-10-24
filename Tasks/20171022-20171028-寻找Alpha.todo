@@ -21,8 +21,23 @@ Data:
     ☐ CZCE
     ☐ DCE
     ☐ SHFE
+    
+  CiticPublic:
+    ☐ 数据入库
 
 
+--------------------------------------------------------------------------------
+vnpy:
+  ☐ 写一个应急响应的方案和处理流程图
+  ☐ 20171024 深圳办公室断网，需要从阿里服务器下载数据
+  ☐ 在 CentOS7 下面会报错，virbr0: resource temporally unavailable
+    ✔ 解决：http://xjsunjie.blog.51cto.com/999372/1914963 @done (2017-10-24 16:55)
+    ```bash  
+     virsh net-destroy default
+     virsh net-undefine default 
+     service libvirtd restart
+     ```
+  ☐ 在 CentOS7 下面，如果需要启动界面的话，需要从 main() 主函数入口
 
 --------------------------------------------------------------------------------
 Linux:
