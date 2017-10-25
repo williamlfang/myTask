@@ -8,11 +8,12 @@ Alpha:
 --------------------------------------------------------------------------------
 Data:
   VolumeMultiple:
-    ☐ 整理历史的合约乘数
+    ✔ 整理历史的合约乘数 @done (2017-10-25 17:03)
       ✔ pb 从 20130902 开始调整合约乘数，5 --> 25 盾/手 @done (2017-10-23 16:43)
       ✔ 20170101 之前的数据是根据 FromDC 的历史数据整理得到的，没有 info 的信息，这个是需要更新的 @done (2017-10-23 16:43)
       ✔ 20170101 之后是从高驰给的数据，citicPublic，有提供 info 的数据，所以不需要更新 @done (2017-10-23 16:43)
-    ☐ 更新 MySQL 数据库: VolumeMultiple
+    ✔ 更新 MySQL 数据库: VolumeMultiple @done (2017-10-25 17:03)
+    ✔ 更新 PriceTick @done (2017-10-25 17:03)
 
   PriceTick:
 
@@ -23,7 +24,7 @@ Data:
     ☐ SHFE
     
   CiticPublic:
-    ☐ 数据入库
+    ✔ 数据入库 @done (2017-10-25 17:02)
 
 
 --------------------------------------------------------------------------------
@@ -37,12 +38,12 @@ vnpy:
      virsh net-undefine default 
      service libvirtd restart
      ```
-  ☐ 在 CentOS7 下面，如果需要启动界面的话，需要从 main() 主函数入口
+  ✔ 在 CentOS7 下面，如果需要启动界面的话，需要从 main() 主函数入口 @done (2017-10-25 17:02)
 
 
 --------------------------------------------------------------------------------
 MySQL:
-  ☐ 增加用户:
+  ✔ 增加用户: @done (2017-10-25 17:02)
     ☐ insert into mysql.user(Host, User, Password) values('%', 'trader', password('123@abc'));
     ☐ grant all on *.* to 'trader'@'%' identified by 'abc@123';
 
@@ -56,7 +57,7 @@ Linux:
   Python: High Performace Programming:
 
   CentOS7 安装 Sublime Text3:
-    Ref: http://software-engineer.gatsbylee.com/how-to-install-sublime-3-on-centos-7-rhel-7/
+    ✔ Ref: http://software-engineer.gatsbylee.com/how-to-install-sublime-3-on-centos-7-rhel-7/ @done (2017-10-25 17:03)
 
     ☐ 下载文件
       cd /tmp
@@ -91,5 +92,6 @@ Blog:
 
   交易所数据爬虫系列:
     ☐ CZCE
+  ✔ CentOS 安装 Sublime @done (2017-10-25 11:40)
 
   
