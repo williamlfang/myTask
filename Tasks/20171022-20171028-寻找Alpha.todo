@@ -39,6 +39,15 @@ vnpy:
      ```
   ☐ 在 CentOS7 下面，如果需要启动界面的话，需要从 main() 主函数入口
 
+
+--------------------------------------------------------------------------------
+MySQL:
+  ☐ 增加用户:
+    ☐ insert into mysql.user(Host, User, Password) values('%', 'trader', password('123@abc'));
+    ☐ grant all on *.* to 'trader'@'%' identified by 'abc@123';
+
+
+
 --------------------------------------------------------------------------------
 Linux:
   
@@ -46,6 +55,35 @@ Linux:
 
   Python: High Performace Programming:
 
+  CentOS7 安装 Sublime Text3:
+    Ref: http://software-engineer.gatsbylee.com/how-to-install-sublime-3-on-centos-7-rhel-7/
+
+    ☐ 下载文件
+      cd /tmp
+      wget https://download.sublimetext.com/sublime_text_3_build_3143_x64.tar.bz2
+    ☐ 解压，并放在 /opt
+      sudo tar -vxjf sublime_text_3_build_3143_x64.tar.bz2 -C /opt
+    ☐ 测试安装
+      sublime3
+    ☐ 建立桌面图标
+      sudo sublime3 /usr/share/applications/sublime3.desktop
+      sudo vim /usr/share/applications/sublime3.desktop
+    ☐ 添加以下内容
+    ```bash
+    [Desktop Entry]
+    Name=Sublime3
+    Exec=sublime3
+    Terminal=false
+    Icon=/opt/sublime_text_3/Icon/48x48/sublime-text.png
+    Type=Application
+    Categories=TextEditor;IDE;Development
+    X-Ayatana-Desktop-Shortcuts=NewWindow
+     
+    [NewWindow Shortcut Group]
+    Name=New Window
+    Exec=sublime -n
+    TargetEnvironment=Unity
+    ```
 
 
 --------------------------------------------------------------------------------
