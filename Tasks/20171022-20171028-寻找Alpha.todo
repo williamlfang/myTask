@@ -33,7 +33,7 @@ vnpy:
   ☐ 20171024 深圳办公室断网，需要从阿里服务器下载数据
   ☐ 20171026 深圳办公室因为欠费断网，数据有损坏，需要从阿里服务器下载
   ☐ 20171025 阿里云的数据有问题，夜盘未启动
-  ☐ 在 CentOS7 下面会报错，virbr0: resource temporally unavailable
+  ✔ 在 CentOS7 下面会报错，virbr0: resource temporally unavailable @done (2017-10-27 10:29)
     ✔ 解决：http://xjsunjie.blog.51cto.com/999372/1914963 @done (2017-10-24 16:55)
     ```bash  
      virsh net-destroy default
@@ -46,8 +46,10 @@ vnpy:
 --------------------------------------------------------------------------------
 MySQL:
   ✔ 增加用户: @done (2017-10-25 17:02)
-    ☐ insert into mysql.user(Host, User, Password) values('%', 'trader', password('123@abc'));
-    ☐ grant all on *.* to 'trader'@'%' identified by 'abc@123';
+    ```bash
+    insert into mysql.user(Host, User, Password) values('%', 'trader', password('123@abc'));
+    grant all on *.* to 'trader'@'%' identified by 'abc@123';
+    ```
 
 
 
@@ -88,12 +90,28 @@ Linux:
     TargetEnvironment=Unity
     ```
 
+  清理内存:
+
+    Ref: http://www.linuxde.net/2011/07/402.html
+
+    ```bash
+    # 查看内存大小
+    free -hm
+    
+    # 手动释放内存
+    sync  
+    echo 3 > /proc/sys/vm/drop_caches
+    cat /proc/sys/vm/drop_caches
+
+    # 再次查看是否已经释放出来
+    free -m
+    ```
 
 --------------------------------------------------------------------------------
 Blog:
 
   交易所数据爬虫系列:
-    ☐ CZCE
+    ✔ CZCE @done (2017-10-27 10:29)
   ✔ CentOS 安装 Sublime @done (2017-10-25 11:40)
 
   
