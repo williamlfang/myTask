@@ -57,7 +57,7 @@ task :task do
   # filename = File.join(CONFIG['posts'], "#{date}-#{slug}.#{CONFIG['post_ext']}")
 
   ## 这个可以直接显示中文名称:
-  filename = File.join(CONFIG['tasks'], "#{dateBegin}-#{dateEnd}-#{title}.#{CONFIG['task_ext']}")
+  filename = File.join(CONFIG['tasks'], "#{dateBegin}-#{dateEnd}-#{title.gsub(' ','-').gsub('：','-')}.#{CONFIG['task_ext']}")
 
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
