@@ -1,0 +1,7 @@
+--------------------------------------------------------------------------------
+Mac:
+  ✔ 设置触摸板，允许选择段落： @done (17-10-30 13:12)
+    ☐ System Prefenece -> Accessibility
+    ☐ Mouse & Touchpad -> Trackpad Options
+    ☐ 在 Enable dragging 打勾，然后在复选框选择 without drag lock
+
