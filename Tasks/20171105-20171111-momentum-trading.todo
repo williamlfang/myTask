@@ -28,5 +28,29 @@ Linux:
     ```bash
     
     ```
+  CentOS 更新 Rstudio-server:
+    ☐ 首先需要到 Rstudio 的官网下载最新版本的 Rstudio-server，记得选择 CentOS/RHEL
+    ☐ 下载到本地进行安装
+    ```bash
+    cd /tmp
+    wget https://download2.rstudio.org/rstudio-server-rhel-1.1.383-x86_64.rpm
+    sudo yum install --nogpgcheck rstudio-server-rhel-1.1.383-x86_64.rpm
+    ```
+    ☐ 如果没有意外的话，我们是可以直接在网页打开 Rstudio 界面的。不过，如果我们的更新的过程中，不小心把原来的程序关闭了，这时候需要重启端口
+    ```bash
+    ## 尝试重启服务
+    sudo rstudio-server restart
+    # initctl: Unknown instance
+    # rsession no process restart
 
+    ## 使用以下三个步骤来重新配置 8787 端口
+    
+    ## 1) check the process that used 8787
+    sudo fuser 8787/tcp
 
+    ## 2) with the -k option to kill all process
+    sudo fuser -k 8787/tcp
+
+    ## 3) start rstudio-server
+    sudo rstudio-server start
+    ```
