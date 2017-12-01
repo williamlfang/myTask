@@ -70,4 +70,78 @@ Report bugs to cjwatson@debian.org.
 
 ## 查找速记表
 wget https://www.cheatography.com/davechild/cheat-sheets/linux-command-line/pdf/
+
+## Command  Description
+File Commands
+ls  List the content of the current directory
+ls -R  List the subdirectories recursively
+ls -a  List all the content, including hidden files
+ls -l  List the content and its information
+pwd  Output the current directory that you are in
+cd folder1  Change the working directory to folder1
+cd  Return to the $Home directory
+cd ..  Go up a directory
+cd -  Return to the previous directory
+cp source destination  Copy source to destination
+cp -r source destination  Copy a folder recursively from source to destination
+mv source destination  Move (or rename) a file from source to destination
+rm file1  Remove file1
+rm -f file1  Remove file1 without prompt
+rm -r folder  Remove a folder and its content recursively
+mkdir foldername  Create a new folder foldername
+rmdir foldername  Remove an empty folder
+file file1  Show the file type of file1
+cat file1 file2  Concatenate file1 to file 2
+cat > file1  Concatenate standard input to file1
+less file1  View and paginate file1
+head file1  Show first 10 lines of file1
+tail file1  Show last 10 lines of file1
+chmod 777 file  Change file permission of file to 777
+chown user:group file  Change ownership of file to user and group group
+ln -s source destination  Create a symbolic link from source to destination
+
+File Encryption and Compression
+gpg -c file  Encrypt file
+gpg file.gpg  Decrypt file.gpg
+tar -cf archive.tar foo bar  Create archive.tar from files foo and bar
+tar -xf archive.tar  Extract all files from archive.tar.
+gzip file1  Compress file1 and rename it to file1.gz
+gzip -d file1.gz  Decompress file1.gz
+
+System Commands
+uname -a  Show system and kernel
+head -n1 /etc/issue  Show distribution
+mount  Show mounted filesystems
+date  Show system date
+uptime  Show system uptime
+whoami  Show your username
+w  Display who is online
+man command  Show manual for command
+!!  Repeat the last command
+exit  Log out of current session
+
+File Searching Commands
+grep pattern files  Search for pattern in files
+grep -i  Case insensitive search
+grep -r  Recursive search
+grep -v  Inverted search
+grep -o  Show matched part of file only
+locate file1  Find file1
+whereis command  Find binary/source/manual for command
+which app  Locate a command for the app
+look string file1  Display any lines in file1 which contain string as a prefix.
+
+Process Management
+ps  Show snapshot of processes
+top  Show real time processes
+kill pid  Kill process with id pid
+pkill name  Kill process with name name
+killall name  Kill all processes with names beginning name
+
+Disk Space
+df -h  Show free space on mounted filesystems
+du -h folder  Show file usage of each folder in folder
+du -sh folder  Show the total file size of folder
+fdisk -l  Show disks partitions sizes and types (run as root)
+free  Show memory and swap usage
 ```
