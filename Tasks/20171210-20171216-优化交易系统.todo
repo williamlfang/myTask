@@ -58,6 +58,10 @@ pyenv virtualenv -p /usr/local/bin/python python2
 
 ## 删除版本
 pyenv uninstall python2
+
+pyenv virtualenv -p /home/william/anaconda2/bin/python python2
+pyenv virtualenv -p /home/william/anaconda3/bin/python python3
+
 ```
 
 
