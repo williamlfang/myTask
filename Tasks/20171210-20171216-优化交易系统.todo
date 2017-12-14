@@ -50,6 +50,12 @@ pyenv local
 ## 当前 shell
 
 pyenv shell
+
+## 设置新的版本
+pyenv virtualenv -p /usr/local/bin/python python2
+
+## 删除版本
+pyenv uninstall python2
 ```
 
 
