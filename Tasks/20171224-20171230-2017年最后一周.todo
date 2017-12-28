@@ -18,7 +18,7 @@
 
 --------------------------------------------------------------------------------
 服务器运维:
-  从命令行启动 teamviewer
+  从命令行启动 teamviewer:
   
     ```bash
     ## 启动或停止 daemon
@@ -30,3 +30,18 @@
     ## 设置密码
     sudo teamviewer --passwd <123456>
     ```
+
+  保持服务器长时间连接状态:
+    ☐ 需要使用 root 权限来修改 `/etc/ssh` 下面的配置
+
+    ```bash
+    grep ClientAlive /etc/ssh/sshd_config
+
+    #ClientAliveInterval 0
+    #ClientAliveCountMax 3
+    ClientAliveInterval 60
+    ClientAliveCountMax 5
+    ```
+
+    ☐ 如上所示，我们需要让服务器间隔一段时间给 Client 发送状态命令，这里我设置为 60(s)。进过这么设置，我们便可以保持 ssh 长时间在线状态了。 
+
