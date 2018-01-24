@@ -58,7 +58,7 @@ Linux:
   CentOS 使用 crontab 显示 vn.py 交易系统界面:
     ☐ 在系统添加 
         ```bash
-        export DISPLAY=:0
+        export DISPLAY=:0.0
         ```
     ☐ 在 main,py 主函数脚本添加
         ```python
