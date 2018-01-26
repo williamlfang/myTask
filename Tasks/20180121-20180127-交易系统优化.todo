@@ -1,0 +1,98 @@
+## =============================================================================
+CentOS 重新安装 MySQL
+
+Ref:
+  ☐ http://www.cnblogs.com/xiaoluo501395377/archive/2013/04/07/3003278.html
+  ☐ https://stackoverflow.com/questions/33510184/change-mysql-root-password-on-centos7
+  ☐ https://stackoverflow.com/questions/33467337/reset-mysql-root-password-using-alter-user-statement-after-install-on-mac
+  ☐ https://www.cnblogs.com/ivictor/p/5142809.html
+
+解决 root 登录密码问题:
+
+    ```bash
+    ## 1. Stop mysql:
+    systemctl stop mysqld
+
+    ## 2. Set the mySQL environment option 
+    systemctl set-environment MYSQLD_OPTS="--skip-grant-tables"
+
+    ## 3. Start mysql usig the options you just set
+    systemctl start mysqld
+
+    ## 4. Login as root
+    mysql -u root
+
+    ## 5. Update the root user password with these mysql commands
+    mysql> UPDATE mysql.user SET authentication_string = PASSWORD('MyNewPassword') WHERE User = 'root' AND Host = 'localhost';
+    mysql> FLUSH PRIVILEGES;
+    mysql> quit
+
+    ## 6. Stop mysql
+    systemctl stop mysqld
+
+    ## 7. Unset the mySQL envitroment option so it starts normally next time
+    systemctl unset-environment MYSQLD_OPTS
+
+    ## 8. Start mysql normally:
+    systemctl start mysqld
+
+    ## 9.
+    set global validate_password_policy=0;
+    ALTER USER USER() IDENTIFIED BY '12345678';
+
+    ## 9. Try to login using your new password:
+    mysql -u root -p
+    ```
+解决 MySQL 5.7 中 Your password does not satisfy the current policy requirements. 问题:
+
+Ref:
+    http://blog.csdn.net/kuluzs/article/details/51924374
+    ☐ set global validate_password_policy=0;  
+    ☐ set global validate_password_mixed_case_count=0;  
+    ☐ set global validate_password_number_count=3; 
+    ☐ set global validate_password_special_char_count=0; 
+    ☐ set global validate_password_length=3;  
+
+MySQL更改数据库数据存储目录:
+Ref:
+    ☐ http://www.cnblogs.com/kerrycode/p/4371938.html
+    ☐ mysqladmin -u root -p variables | grep datadir
+    ☐ service mysqld stop
+    ☐ mv /var/lib/mysql /data/DataBase/
+    ☐ 修改配置文件my.cnf
+    ☐ service mysqld start
+    ☐ mysqladmin -u root -p variables | grep datadir
+
+    # For advice on how to change settings please see
+    # http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html
+
+    [mysqld]
+    #
+    # Remove leading # and set to the amount of RAM for the most important data
+    # cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+    # innodb_buffer_pool_size = 128M
+    #
+    # Remove leading # to turn on a very important data integrity option: logging
+    # changes to the binary log between backups.
+    # log_bin
+    #
+    # Remove leading # to set options mainly useful for reporting servers.
+    # The server defaults are faster for transactions and fast SELECTs.
+    # Adjust sizes as needed, experiment to find the optimal values.
+    # join_buffer_size = 128M
+    # sort_buffer_size = 2M
+    # read_rnd_buffer_size = 2M
+    ## datadir=/var/lib/mysql
+    datadir=/data/DataBase/mysql
+    ## socket=/var/lib/mysql/mysql.sock
+    socket=/data/DataBase/mysql/mysql.sock
+
+    # Disabling symbolic-links is recommended to prevent assorted security risks
+    symbolic-links=0
+
+    log-error=/var/log/mysqld.log
+    pid-file=/var/run/mysqld/mysqld.pid
+
+    [client]
+    socket=/data/DataBase/mysql/mysql.sock
+
