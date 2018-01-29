@@ -1,0 +1,18 @@
+## =============================================================================
+Emacs 学习之路:
+  ☐ 准备从现在开始，用［预计］三个月的时间来完整地学习　Emacs.
+
+  安装　Ess:
+    ☐ sudo apt install ess
+    ☐ 启动　ess 模式
+      在　~/.emacs 文件中加入
+
+      ```
+      (add-to-list 'load-path "~/.emacs.d/addons/ESS/lisp")
+      (require 'ess-site)
+      (org-babel-do-load-languages
+       'org-babel-load-languages
+       '((R . t)))
+      ```
+
+      这样，在打开　.R 的文件的时候，便可以自动启动　R 的运行模式了．
