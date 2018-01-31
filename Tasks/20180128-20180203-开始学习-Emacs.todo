@@ -16,3 +16,18 @@ Emacs 学习之路:
       ```
 
       这样，在打开　.R 的文件的时候，便可以自动启动　R 的运行模式了．
+
+
+## =============================================================================
+Mac 安装 Navicat 破解版:
+  Ref:
+    ☐ 下载链接: http://www.zhinin.com/navicat_premium-mac.html
+    ☐ 安装过程:
+      ☐ 打开 Mac 偏好设置，『允许所有来源的软件应用』:
+        Ref:http://blog.csdn.net/qearlyu/article/details/72902047
+        ☐ 使用命令行开启模式:
+        ```bash
+        sudo spctl --master-disable  
+        ```
+        ☐ 打开 「System Preference -> Security」，开启 「All apps downloaded from」: Anywhere
+      ☐ 安装 Navicat 即可。
