@@ -7,6 +7,7 @@
    Tools --> Build System --> New Build System
 
    在里面写入内容：
+   
  ☐ c 编译环境
    ```
   {
@@ -16,6 +17,8 @@
   "working_dir" : "$file_path"
   }
    ```
+   保存起来即可
+
  ☐ 使用快捷键 `ctrl+B`:
    Preferences --> Key Bindings --> 增加
 
