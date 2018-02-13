@@ -1,0 +1,26 @@
+## =============================================================================
+使用 Sublime Text 运行 C 程序:
+
+ ☐ 设置系统:
+   增加新的系统：Ref： https://stackoverflow.com/questions/24225343/how-to-compile-and-run-c-in-sublime-text-3
+
+   Tools --> Build System --> New Build System
+
+   在里面写入内容：
+ ☐ c 编译环境
+   ```
+  {
+  "cmd" : ["gcc $file_name -o ${file_base_name} && ./${file_base_name}"],
+  "selector" : "source.c",
+  "shell": true,
+  "working_dir" : "$file_path"
+  }
+   ```
+ ☐ 使用快捷键 `ctrl+B`:
+   Preferences --> Key Bindings --> 增加
+
+   ```
+  { "keys": ["ctrl+b"], "command": "build", "args": { "variant": "" } },
+  { "keys": ["ctrl+shift+b"], "command": "build", "args": { "variant": "Run" } },
+   ```
+
