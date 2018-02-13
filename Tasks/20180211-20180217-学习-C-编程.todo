@@ -27,3 +27,9 @@
   { "keys": ["ctrl+shift+b"], "command": "build", "args": { "variant": "Run" } },
    ```
 
+开发 C/C++ 程序中常用的 Sublime Text3 软件包:
+   ☐ CTags: 高亮顯示 C/C++ 語言需要依靠外掛程式，開啟 Package Control 安裝 Ctag。
+   ☐ SublimeAStyleFormatter: 用于格式化整个文档，可以快速的把整个脚本进行代码格式化
+     ☐ `ctrl+alt+f`: 格式化整个文档
+     ☐ `ctrl+k` + `ctrl+f`: 格式化选定的内容
+   
