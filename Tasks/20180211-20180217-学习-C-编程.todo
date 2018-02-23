@@ -54,3 +54,60 @@
     ./hello 
     ```
 
+使用 `cmake` 来搭建 c/c++ 项目:
+  ☐ 建立项目结构
+
+  ```bash
+  .
+  ├── CMakeLists.txt
+  ├── main.c
+  └── math
+      ├── CMakeLists.txt
+      ├── myMath.c
+      └── myMath.h
+  ```
+
+  ☐ 主函数
+  在根目录下面放置主函数 `main.c`, 通过搭建 CMakeLists.txt。需要注意的是，main.c 引入子目录的头文件需要指定路径。
+
+  根目录下的 CMakeLists.txt 指定连接库
+
+  ```bash
+  # CMake 最低版本号要求
+  cmake_minimum_required (VERSION 2.8)
+  # 项目信息
+  project (demo)
+  # 查找当前目录下的所有源文件
+  # 并将名称保存到 DIR_SRCS 变量
+  aux_source_directory(. DIR_SRCS)
+  # 添加 math 子目录
+  add_subdirectory(math)
+  # 指定生成目标 
+  add_executable(main ${DIR_SRCS})
+  # 添加链接库
+  target_link_libraries(main MathFunctions)
+  ```
+
+  ☐ 在库目录放置头文件
+  在需要实现的各个功能模块都放在库目录，并相应的搭建 CMakeLists.txt，
+
+  ```bash
+  # 查找当前目录下的所有源文件
+  # 并将名称保存到 DIR_LIB_SRCS 变量
+  aux_source_directory(. DIR_LIB_SRCS)
+  # 生成链接库
+  add_library (MathFunctions ${DIR_LIB_SRCS})
+  ```
+  ☐ 开始编译
+  在根目录下面运行
+
+  ```bash
+  ## 先使用 cmake 生成 make 文件
+  cmake .
+
+  ## 生成可执行文件
+  make
+
+  ## 执行
+  ./main
+  ```
