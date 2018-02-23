@@ -33,3 +33,24 @@
      ☐ `ctrl+alt+f`: 格式化整个文档
      ☐ `ctrl+k` + `ctrl+f`: 格式化选定的内容
    
+使用 **项目工程** 的方式开发 c:
+  ☐ 头文件和源文件分离
+
+    分别在 .h 文件放入函数申明，在 .c 文件放入函数实体
+
+  ☐ 分别编译各个源文件
+
+    如有 myMath.h, myMath.c, hello,c
+
+    ```bash
+    ## 先编译成为目标文件
+    gcc -c myMath.c -o myMath.o
+    gcc -c hello.c -o hello.o
+
+    ## 再把目标文件连接在一起生成主函数文件
+    gcc hello.o myMath.o -o hello
+
+    ## 运行主函数
+    ./hello 
+    ```
+
