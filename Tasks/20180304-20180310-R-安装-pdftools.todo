@@ -1,0 +1,83 @@
+## =============================================================================
+CentOS R 安装 pdftools:
+
+`pdftools` 提供了处理 pdf 文档的各种函数功能，具体的功能介绍可以查看　github 项目主页: https://github.com/ropensci/pdftools#building-from-source
+  
+由于　CentOS 无法直接使用 yum 来安装依赖包 `poppler-cpp-devel`，因此我们需要从源文件安装。这里做一个简单的说明，其实主要是安装项目主要上面给的步骤来走就可以了，不过其中有一个小小的坑，需要特别注意。
+
+  ```bash
+  ## --------------------------
+  ## 以下命令需要在　root 权限下运行
+  ## --------------------------
+  
+  # Build dependencies
+  yum install wget xz libjpeg-devel openjpeg2-devel
+
+  # Download and extract
+  cd /tmp
+  wget https://poppler.freedesktop.org/poppler-0.47.0.tar.xz
+  tar -Jxvf poppler-0.47.0.tar.xz
+  cd poppler-0.47.0
+
+  # Build and install
+  ./configure
+  make
+  sudo make install
+  ```
+
+完成以上步骤后，需要我们把相关的路径放在用户根目录下面，把这个放在 `~/.bashrc`
+
+  ```bash
+  [fl@localhost-166 ~]$ cd
+  [fl@localhost-166 ~]$ vim .bachrc
+
+  ## 添加以下内容
+  export LD_LIBRARY_PATH="/usr/local/lib"
+  export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+  ```
+
+得到的是以下的结果
+
+  ```bash
+  william@WorkStation ~ $ fl@166
+  Last login: Thu Mar  8 10:50:23 2018 from 192.168.1.115
+  [fl@localhost-166 ~]$ cat .bash | grep export
+  cat: .bash: No such file or directory
+  [fl@localhost-166 ~]$ cat .bashrc | grep export
+  export PS1='[\u@\h-166 \W]\$ '
+  export PATH="/home/fl/anaconda2/bin:$PATH"
+  export PATH="/home/fl/anaconda2/bin:$PATH"
+  export LD_LIBRARY_PATH="/usr/local/lib"
+  export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+  [fl@localhost-166 ~]$ 
+  ```
+
+最后通过 `R` 来安装软件包即可
+
+  ```bash
+  [fl@localhost-166 ~]$ R
+
+  R version 3.4.2 (2017-09-28) -- "Short Summer"
+  Copyright (C) 2017 The R Foundation for Statistical Computing
+  Platform: x86_64-redhat-linux-gnu (64-bit)
+
+  R is free software and comes with ABSOLUTELY NO WARRANTY.
+  You are welcome to redistribute it under certain conditions.
+  Type 'license()' or 'licence()' for distribution details.
+
+    Natural language support but running in an English locale
+
+  R is a collaborative project with many contributors.
+  Type 'contributors()' for more information and
+  'citation()' on how to cite R or R packages in publications.
+
+  Type 'demo()' for some demos, 'help()' for on-line help, or
+  'help.start()' for an HTML browser interface to help.
+  Type 'q()' to quit R.
+
+  [Previously saved workspace restored]
+
+  > install.packages('pdftools')
+
+  > library(pdftools)
+  ```
