@@ -1,0 +1,22 @@
+## =============================================================================
+
+CentOS 突然无法使用 SMPT(python) 发送邮件:
+  
+  我之前一直通过 python 调用 CentOS 的 SMPT 来发送邮件，用于监控自动化任务执行情况、交易系统运行状况等。昨天由于在测试新的交易系统功能，出现了一个 bug，导致系统开始报错，并通过邮件发送通知。可是，由于到时未及时停止交易系统，没有阻止系统不停的发送报警邮件，导致系统的邮件堆积大量文件，一时无法发送出去。
+
+  下面是解决方法：
+
+  Ref: [解决CentOS下无法发送邮件的问题 + selinux](http://blog.csdn.net/for023/article/details/78124182)
+   
+  ```bash
+  # The solution to both of these scenarios is as follows:
+
+  # 1.To allow PHP/Apache to connect to port 25 issue the following commands as root:
+  setsebool -P httpd_can_network_connect=1
+
+  # 2.To allow PHP mail() to work issue the following command as root:
+  setsebool -P httpd_can_sendmail=1
+
+  # 删除 /var/spool/mail 下面的系统邮件缓存文件
+  rm /var/spool/mail/*
+  ```
