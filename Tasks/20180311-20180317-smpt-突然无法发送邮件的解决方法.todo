@@ -20,3 +20,59 @@ CentOS 突然无法使用 SMPT(python) 发送邮件:
   # 删除 /var/spool/mail 下面的系统邮件缓存文件
   rm /var/spool/mail/*
   ```
+
+## =============================================================================
+MySQL 设置最大连接数:
+
+  MySQL 默认的最大连接数数 1000 个，如果我们在使用一些外部的程序去连接 MySQL 却忘记关闭连接，则会导致报错：
+
+    ```
+    （1040） 'To many connections'
+    ```
+
+  我们可以登录 MySQL 客户端，查看当前设置的最大连接数:
+
+     ```
+     william@WorkStation ~ $ mysql@135
+     Version: 1.12.1
+     Chat: https://gitter.im/dbcli/mycli
+     Mail: https://groups.google.com/forum/#!forum/mycli-users
+     Home: http://mycli.net
+     Thanks to the contributor - Lincoln Loop
+     mysql fl@192.168.1.135:(none)>  show variables like 'max_connections';
+     +-----------------+-------+
+     | Variable_name   | Value |
+     +-----------------+-------+
+     | max_connections | 100   |
+     +-----------------+-------+
+     1 row in set
+     Time: 0.019s
+     mysql fl@192.168.1.135:(none)> 
+     ``
+
+   解决的思路是，通过设置 `/etc/my.cnf` 来修改最大的连接数，然后重启 MySQL 服务即可.
+
+   ```
+   [root@localhost etc]# vim my.cnf 
+   ## 1. 添加以下这行设置
+
+   ## 最大连接数
+   set-variable = max_connections=32000  
+
+   ## 2. 重启服务
+   systemctl restart mysqld.service
+   ```
+
+   再次查看
+
+   ```
+   mysql fl@192.168.1.135:(none)>  show variables like 'max_connections';
+   +-----------------+-------+
+   | Variable_name   | Value |
+   +-----------------+-------+
+   | max_connections | 4190  |
+   +-----------------+-------+
+   1 row in set
+   Time: 0.019s
+   mysql fl@192.168.1.135:(none)> 
+   ```
