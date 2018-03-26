@@ -1,0 +1,27 @@
+## =============================================================================
+彻底解决mysql中文乱码:
+
+  Ref: https://blog.csdn.net/u012410733/article/details/61619656
+
+  ☐ 修改 MySQL 设置
+  ```bash
+  vim /etc/my.cnf
+
+  ## 增加以下字段
+
+  [mysqld]
+  character-set-server=utf8 
+  [client]
+  default-character-set=utf8 
+  [mysql]
+  default-character-set=utf8  
+  ```
+
+  请注意这几个参数配置的位置，不然可能会启动不起来mysql服务：
+
+  ☐ 重启 MySQL 
+
+  ```bash
+  sudo service mysqld restart
+  ```
+
