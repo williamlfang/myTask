@@ -1,0 +1,59 @@
+## =============================================================================
+迁移终端为 `zsh`:
+
+  ☐ 设置系统默认终端
+
+  ```bash
+  ## 查看当前默认的 shell
+  william ~ $ which bash
+  /bin/bash
+
+  ## 查看已经安装的 zsh
+  william ~ $ which zsh
+  /usr/bin/zsh
+
+  ## 使用 chsh
+  chsh -s /bin/zsh
+  ```
+
+  ☐ 配置方案
+
+  参考 [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)。
+
+  - 安装 `oh-my-zsh`
+
+    ```bash
+    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    ```
+
+  - 使用插件
+
+    ```bash
+    vim ~/.zshrc
+
+    ## 设置格式如下
+
+    plugins=(
+      git
+      bundler
+      dotenv
+      osx
+      rake
+      rbenv
+      ruby
+    )
+    ```
+
+  - 设置主题配色
+
+    ```bash
+    ## 格式如下
+    ZSH_THEME="robbyrussell"
+
+    # ZSH_THEME="agnoster" # (this is one of the fancy ones)
+    # see https://github.com/robbyrussell/oh-my-zsh/wiki/Themes#agnoster
+
+    ## 安装 Powerline Fonts
+    sudo apt-get install fonts-powerline
+    ```
+
