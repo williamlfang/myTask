@@ -1,0 +1,176 @@
+## =============================================================================
+
+配置阿里云服务器 CentOS7.4 操作系统:
+
+  最近公司以我个人的名义采购了一台阿里云服务器，配置：
+
+    ☐ 1核CPU
+    ☐ 2G Memory
+    ☐ 40G SSD 存储空间
+    ☐ 1Mb 专用下载网络
+
+  这个配置其实算比较低档次的，不过用于平时接受行情数据倒是也可以够用。毕竟，价格优惠明显摆在那儿：三年使用期限，总共花费 279元。算是业内的良心价格了。
+
+  下面就要开始配置服务器了。
+
+# 设置远程服务器 root 密码
+
+1. 选择管理控制台，点击 ‘ECS’
+2. 选择 `实例`，然后找到 `更多`，装着 `重置密码`
+3. 修改完成密码后，记得需要点击选择 `重启` 才能够生效。我是在这一步忘记重启，结果掉坑里了。还好后来找到出口爬了出来。
+
+# CentOS 7 系统配置
+
+## 增加用户/组
+
+```bash
+# 增加用户 trader
+adduser trader
+
+# 设置密码
+passwd trader
+```
+
+## 增加 swap
+
+参考文章:[在阿里云CentOS 7创建swap分区](https://blog.tanteng.me/2016/03/aliyun-centos-7-swap/)
+
+```bash
+# 查看内存使用情况
+free -h
+
+# 增加 swap 空间
+# 一般为系统配置内存的同等大小
+
+# 1. 创建分区
+dd if=/dev/zero of=/home/swap bs=1024 count=1048576
+
+# 2. 格式化 swap 分区
+mkswap /home/swap
+
+# 3. 启动
+swapon /home/swap
+
+# 4.swap分区自动挂载
+vim /etc/fstab
+
+# 在文件末尾加上
+
+/home/swap swap swap default 0 0
+```
+
+## 增加常用 yum 源
+
+```bash
+# 备份
+cd /etc/yum.repos.d/
+mkdir repo_bk
+mv *.repo repo_bk/
+
+# 添加阿里源
+wget http://mirrors.aliyun.com/repo/Centos-7.repo
+
+ls
+
+# 清除系统所有的yum缓存
+yum clean all
+
+# 生成yum缓存
+yum makecache
+
+# 安装 EPEL
+yum install -y epel-release
+
+# 下载阿里开源镜像的epel源文件
+wget -O /etc/yum.repos.d/epel-7.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+ls
+
+# 再次清除系统yum缓存，并重新生成新的yum缓存
+yum clean all && yum makecache
+```
+
+## 安装常用软件包
+
+```bash
+yum install -y cmake bzip2 htop
+
+yum -y install gcc gcc-c++ kernel-devel  git cmake
+yum -y install python-devel libxslt-devel libffi-devel openssl-devel
+yum -y install python-pip
+
+# 完成 CMAKE 配置
+yum install gcc-c++
+
+# 安装 mysql
+yum install mysql
+yum install mariadb-server mariadb
+yum install mysql-devel
+
+## 启动 mariadb.service 引擎
+systemctl start|stop|restart mariadb.service
+
+## 更改 root 密码
+mysql -u root
+UPDATE mysql.user SET Password=PASSWORD('MyNewPassHere') WHERE User='root';
+FLUSH PRIVILEGES;
+quit;
+
+mysql -u root -pMyNewPassHere
+
+## 增加用户
+create user 'trader'@'localhost' identified by '************';
+
+```
+
+## 部署 vnpy 接收 CTP 行情数据
+
+```bash
+# 1. 下载 Anaconda.sh, 并安装，设置默认 Python2 路径到环境变量里面
+
+wget https://repo.continuum.io/archive/Anaconda2-4.4.0-Linux-x86_64.sh
+chmod +x Anaconda2-4.4.0-Linux-x86_64.sh
+./Anaconda2-4.4.0-Linux-x86_64.sh
+
+# 2. 安装 Boost 1.55
+
+cd temp
+wget -O boost_1_55_0.tar.bz2 http://downloads.sourceforge.net/project/boost/boost/1.55.0/boost_1_55_0.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fboost%2Ffiles%2Fboost%2F1.55.0%2F&ts=1385953406&use_mirror=softlayer-ams
+ls
+file boost_1_55_0.tar.bz2
+tar jxvf boost_1_55_0.tar.bz2
+ls
+cd boost_1_55_0
+ls
+./bootstrap.sh
+./b2
+./b2 install
+
+# 3. 安装 pyqt
+conda uninstall pyqt
+conda install pyqt=5
+
+pip install pymongo qdarkstyle zmq  msgpack-python
+
+# 3. 安装 vnpy
+./install.sh
+```
+
+## 处理 MySQL 问题
+
+1. MySQL 设置密码安全
+    Ref: https://github.com/williamlfang/myTask/blob/master/Tasks/20180121-20180127-%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96.todo
+
+    ```bash
+    解决 MySQL 5.7 中 Your password does not satisfy the current policy requirements. 问题:
+
+    Ref:
+        http://blog.csdn.net/kuluzs/article/details/51924374
+        
+        set global validate_password_policy=0;  
+        set global validate_password_mixed_case_count=0;  
+        set global validate_password_number_count=3; 
+        set global validate_password_special_char_count=0; 
+        set global validate_password_length=3;  
+    ```
+
