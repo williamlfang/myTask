@@ -19,6 +19,10 @@ CentOS 突然无法使用 SMPT(python) 发送邮件:
 
   # 删除 /var/spool/mail 下面的系统邮件缓存文件
   rm /var/spool/mail/*
+
+  # 重启 sendmail
+  # ref:https://www.linuxidc.com/Linux/2014-10/107946.htm
+  sudo service sendmail restart
   ```
 
 ## =============================================================================
