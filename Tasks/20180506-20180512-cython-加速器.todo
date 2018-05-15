@@ -1,0 +1,35 @@
+## =============================================================================
+使用 `Cython` 加速 `python` 运行:
+
+# 安装
+
+```bash
+pip install cython
+```
+
+# 安装 `cymysql`
+
+## github 项目
+
+```bash
+pip install cymysql==0.9.4
+```
+
+## example
+
+```python
+import cymysql
+conn = cymysql.connect(host='127.0.0.1', user='fl', passwd='abc@123', db='SimNow_FL', charset='utf8')
+cur = conn.cursor()
+cur.execute('select * from tradingSignal')
+for r in cur.fetchall():
+   print(r[0], r[1])
+
+
+conn = cymysql.connect(host='127.0.0.1', user='fl', passwd='abc@123', db='SimNow_FL', charset='utf8')
+query = "select * from tradingSignal"
+mysqlData = pd.read_sql(str(query), conn)
+```
+
+
+

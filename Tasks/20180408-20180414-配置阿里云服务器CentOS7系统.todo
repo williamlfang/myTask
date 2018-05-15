@@ -62,6 +62,13 @@ vim /etc/fstab
 ## 增加常用 yum 源
 
 ```bash
+## 配置下centos的DNS
+## 一个国内,一个国外
+vim /etc/resolv.conf
+
+nameserver 114.114.114.114
+nameserver 8.8.8.8
+
 # 备份
 cd /etc/yum.repos.d/
 mkdir repo_bk
@@ -69,6 +76,21 @@ mv *.repo repo_bk/
 
 # 添加阿里源
 wget http://mirrors.aliyun.com/repo/Centos-7.repo
+
+## 网易yum源:
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo
+yum clean all
+yum makecache
+
+## 阿里云yum源:
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum clean all
+yum makecache
+
+## epel源
+yum -y install epel-release
+yum clean all
+yum makecache
 
 ls
 
@@ -174,3 +196,9 @@ pip install pymongo qdarkstyle zmq  msgpack-python
         set global validate_password_length=3;  
     ```
 
+## 4. 安装 R
+
+```bash
+sudo yum install epel-release
+sudo yum install R
+```
