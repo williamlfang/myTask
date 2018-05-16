@@ -143,6 +143,22 @@ mysql -u root -pMyNewPassHere
 ## 增加用户
 create user 'trader'@'localhost' identified by '************';
 
+## 增加远程访问 MySQL 3306 端口
+
+CentOS7 启动 MySQL 3306 远程访问
+
+centos7 使用的是FirewallD防火墙。
+FirewallD 是 iptables 的前端控制器，用于实现持久的网络流量规则。它提供命令行和图形界面，在大多数 Linux 发行版的仓库中都有。
+
+# 1.FirewallD防火墙开放3306端口
+firewall-cmd --zone=public --add-port=3306/tcp --permanent
+
+# 2.重启防火墙
+systemctl restart firewalld.service
+
+--zone #作用域
+--add-port=3306/tcp #添加端口，格式为：端口/通讯协议
+--permanent  #永久生效，没有此参数重启后失效
 ```
 
 ## 部署 vnpy 接收 CTP 行情数据
