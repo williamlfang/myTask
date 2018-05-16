@@ -159,6 +159,19 @@ systemctl restart firewalld.service
 --zone #作用域
 --add-port=3306/tcp #添加端口，格式为：端口/通讯协议
 --permanent  #永久生效，没有此参数重启后失效
+
+## MySQL 设置最大连接数:
+vim /etc/my.cnf
+
+## 一定要在 “[mysqld]”下面添加“max_connections=1000”
+
+[mysqld]
+max_connections=32000 
+
+systemctl restart mysqld.service
+## systemctl restart mariadb.service
+
+mysql>  show variables like 'max_connections';
 ```
 
 ## 部署 vnpy 接收 CTP 行情数据
