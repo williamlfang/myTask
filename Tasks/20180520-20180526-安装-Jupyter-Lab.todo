@@ -1,0 +1,23 @@
+Ubuntu 安装 Jupyterlab:
+
+# 安装
+
+```bash
+# 使用 pip
+pip install jupyterlab
+
+# 使用 conda
+conda install -c conda-forge jupyterlab
+```
+
+# 运行
+
+```bash
+# 开启运行
+jupyter lab
+```
+
+CentOS7 安装 JupyterLab:
+
+
+
