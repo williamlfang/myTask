@@ -12,4 +12,7 @@ smbpasswd fl
 
 New SMB password:
 Retype new SMB password:
+
+## 用户连接服务器主机
+## \\192.168.1.166\fl
 ```
