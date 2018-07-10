@@ -1,0 +1,15 @@
+使用 `samba` 可以实现 `Linux` 服务器主机与 `Windows` 客户端之间的文件共享。这里简要介绍一下如何给 `samba` 配置账户，并修改用户密码。
+
+`samba` 的命令行代码是 `smb`。
+
+```bash
+## 增加一个用后，使用 append 的选项
+smbpasswd -a user1
+
+## 修改拥护密码
+## 输入两次新密码即可
+smbpasswd fl
+
+New SMB password:
+Retype new SMB password:
+```
