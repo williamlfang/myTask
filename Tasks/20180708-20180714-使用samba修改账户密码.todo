@@ -16,3 +16,14 @@ Retype new SMB password:
 ## 用户连接服务器主机
 ## \\192.168.1.166\fl
 ```
+
+ubuntu14.04恢复系统默认中文字体:
+
+今天Ubuntu14.04已发布就进行了更新，在配置过程中，无意安装了某些中文字体，导致系统的中文字体极其难看，根据网上说的修改配置文件和tweak修改的方法都不能解决，最终找到的解决办法（http://tieba.baidu.com/p/2860116269）：
+
+中文本地化后，会安装2个字体（fonts-arphic-ukai，fonts-arphic-uming），删除即可：
+
+```bash
+sudo apt-get remove fonts-arphic-ukai fonts-arphic-uming
+```
+
