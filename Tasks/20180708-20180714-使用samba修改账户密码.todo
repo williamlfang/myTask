@@ -24,7 +24,7 @@ ubuntu14.04恢复系统默认中文字体:
 中文本地化后，会安装2个字体（fonts-arphic-ukai，fonts-arphic-uming），删除即可：
 
 ```bash
-## 删除这些楷体字各式
+## 删除这些楷体字格式
 sudo apt-get remove fonts-arphic-ukai fonts-arphic-uming
 ```
 
