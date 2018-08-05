@@ -118,6 +118,11 @@ yum clean all && yum makecache
 yum install -y cmake bzip2 htop
 
 yum -y install gcc gcc-c++ kernel-devel  git cmake
+## -----------------------------------------------
+## sudo apt-get install libboost-all-dev
+## apt search boost
+## sudo apt install libboost-all-dev
+## -----------------------------------------------
 yum -y install python-devel libxslt-devel libffi-devel openssl-devel
 yum -y install python-pip
 
