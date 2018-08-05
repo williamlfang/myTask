@@ -26,6 +26,7 @@ ubuntu14.04恢复系统默认中文字体:
 ```bash
 ## 删除这些楷体字格式
 ## 可以解决　chrome,　sublime 等字体难看的问题
+##
 sudo apt-get remove fonts-arphic-ukai fonts-arphic-uming
 ```
 
