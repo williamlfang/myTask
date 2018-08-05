@@ -1,0 +1,21 @@
+# github 配置 ssh-key
+
+经常使用 `github`,会发现每次在命令行输入账户和密码是一件多么惹人烦的事情.不过现在有一个更好的方法,是使用 `ssh-key` 来配对进行身份的验证.
+
+具体的带入如下
+
+```bash
+cd ~
+ssh-keygen -t rsa -C "william.lian.fang@gmail.com"
+
+复制 ./ssh/id_rsa.pub 到 github/account/ssh
+
+# 添加全局设置
+git config --global user.email “william.lian.fang@gmail.com”
+git config --global user.name “williamlfang”
+
+# 进行一次验证操作
+ssh -T git@github.com
+
+记得输入 Yes 进行确认即可.
+```
