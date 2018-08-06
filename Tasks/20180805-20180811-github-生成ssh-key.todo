@@ -19,3 +19,22 @@ ssh -T git@github.com
 
 记得输入 Yes 进行确认即可.
 ```
+
+# Ubuntu 18.04 使用 Qt 报错: QGtkStyle could not resolve GTK. Make sure you have installed the proper libraries.
+
+通过 google 在网上找到的解决方案:https://groups.google.com/forum/#!topic/eman2/YrFQWiTludc
+
+> It looks like this is a bug in Ubuntu itself. EMAN2 doesn't specify which GUI style to use, leaving that to user preferences. Apparently Ubuntu has Gtk+ set as the default style, but doesn't have that style installed on the computer (at least that's what it appears). > 
+
+> One way to solve this is :
+> 1. sudo apt install qt4-qtconfig
+> 2. qtconfig
+> 3. Appearance -> Select GUI Style: Select Cleanlooks
+> (or any other style which is actually installed)
+
+
+```bash
+sudo apt install qt4-qtconfig
+qtconfig
+# 在弹出来的窗口选择 Apperance -> Select GUI Style: 选个一个可用的即可
+```
