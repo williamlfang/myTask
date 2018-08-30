@@ -1,0 +1,11 @@
+# 安装常用的 `Ubuntu` 软件包
+
+```bash
+sudo apt update
+
+sudo apt install libssl-dev libxml2-dev libcurl4-openssl-dev
+
+sudo apt install pandoc
+
+sudo gem install os hz2py
+```
