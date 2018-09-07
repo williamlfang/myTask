@@ -1,0 +1,18 @@
+# Ubuntu 字体变成楷体
+
+在更新系统字体或则安装 `LaTeX` 的时候，`Ubuntu` 会默认给中文系统安装楷体字。这种字体看久了很容易出现字体发虚，引起眼睛疲劳。这里我给出解决方法。
+
+```bash
+# 先删除字体
+sudo apt-get remove fonts-arphic-ukai
+sudo apt-get remove fonts-arphic-uming
+
+# 进入字体目录在删除
+cd /usr/share/fonts/truetype
+rm -rf arphic-*
+```
+
+就是这些字体导致系统调用默认的楷体字，删除掉就可以类。
+
+![](20180902-20180908-处理-Ubuntu-系统字体变成楷体.assets/ubuntu-kai.png)
+
