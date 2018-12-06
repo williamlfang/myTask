@@ -1,0 +1,9 @@
+1. 下载 `网易音乐包`: [由网易云音乐deb包制作的appimage格式](https://gitee.com/kelleg/netease-cloud-music-appimage)
+2. 增加可执行权限 `chmod +x`。
+3. 在 `~/.zshrc` 增加 `alias`:
+
+```bash
+alias music="sudo /home/william/Documents/NetEase_Cloud_Music-x86_64.AppImage  &"
+```
+
+以后就可以用 `music` 命令来打开了。
