@@ -1,0 +1,197 @@
+最近在网上看到别人写的介绍**可以复用**的终端模拟器，`Tmux`，有点类似于 `Gnu Screen`，可以在一个界面内建立多个对话模式，十分的方便。
+
+以下则是根据网上推荐，对 `～/.tmux.conf` 进行定制华配置，其中用到了：
+
+- 每次修改`~/.tmux.conf`完成后，使用 `prefix :(shfit + ;)`来载入配置。这里我把 `prefix` 组合设置为 `C-k`，这样可以保证右手不离开键盘，而左手只需要安装 `Ctr` 键就可以了。
+
+- [tmux-powerline](https://github.com/erikw/tmux-powerline)，用于改进底部状态栏显示，可以进一步修改。
+
+  ```bash
+  cd ~/Downloads
+  git clone git@github.com:erikw/tmux-powerline.git
+  
+  cd tmux-powerline
+  vim ./theme/default.sh
+  
+  ## 根据需要来增减需要显示的内容
+  
+  if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
+  	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
+  		#"earthquake 3 0" \
+  		"pwd 89 211" \
+  		#"macos_notification_count 29 255" \
+  		#"mailcount 9 255" \
+  		#"now_playing 234 37" \
+  		#"cpu 240 136" \
+  		#"load 237 167" \
+  		#"tmux_mem_cpu_load 234 136" \
+  		"battery 137 127" \
+  		#"weather 37 255" \
+  		#"rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
+  		#"xkb_layout 125 117" \
+  		"date_day 235 136" \
+  		"date 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+  		"time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+  		#"utc_time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+  	)
+  fi
+  
+  ## 这个是默认显示完整的路径名称，
+  ## 如果想要在 terminator 只显示当前文件夹名称，则需要修改
+  ## ~/.oh-my-zsh/themes/agnoster.zsh-theme
+  ## ------------------------------------------------
+  # Dir: current working directory
+  ## 显示路径
+  prompt_dir() {
+    ## 显示全部路径
+    #prompt_segment blue $CURRENT_FG '%~'
+    ## 只显示当前路径
+    prompt_segment blue $CURRENT_FG '%c'
+  }
+  ## ------------------------------------------------
+  ```
+
+
+
+```bash
+#
+# author   : Xu Xiaodong <xxdlhy@gmail.com>
+# modified : 2017 Apr 29
+#
+
+#-- base settings --#
+## set -g default-terminal "screen-256color"
+set -g default-terminal 'linux'
+set -ga terminal-overrides ",rxvt-unicode-256color:Tc"
+set -sg escape-time 0
+set -g display-time 3000
+set -g history-limit 65535
+set -g base-index 1
+set -g pane-base-index 1
+set -g renumber-windows on
+
+#-- bindkeys --#
+# prefix key (Ctrl+k)
+set -g prefix ^k
+unbind ^b
+bind k send-prefix
+
+# split window
+unbind '"'
+bind - splitw -v # vertical split (prefix -)
+unbind %
+#bind | splitw -h # horizontal split (prefix |)
+bind \ splitw -h # horizontal split (prefix \)
+
+# select pane
+bind k selectp -U # above (prefix k)
+bind j selectp -D # below (prefix j)
+bind h selectp -L # left (prefix h)
+bind l selectp -R # right (prefix l)
+
+# resize pane
+bind -r ^k resizep -U 10 # upward (prefix Ctrl+k)
+bind -r ^j resizep -D 10 # downward (prefix Ctrl+j)
+bind -r ^h resizep -L 10 # to the left (prefix Ctrl+h)
+bind -r ^l resizep -R 10 # to the right (prefix Ctrl+l)
+
+# swap pane
+bind ^u swapp -U # swap with the previous pane (prefix Ctrl+u)
+bind ^d swapp -D # swap with the next pane (prefix Ctrl+d)
+
+# select layout
+bind , select-layout even-vertical
+bind . select-layout even-horizontal
+
+# misc
+bind e lastp  # select the last pane (prefix e)
+bind ^e last  # select the last window (prefix Ctrl+e)
+bind q killp  # kill pane (prefix q)
+bind ^q killw # kill window (prefix Ctrl+q)
+
+# copy mode
+bind Escape copy-mode               # enter copy mode (prefix Escape)
+bind ^p pasteb                      # paste buffer (prefix Ctrl+p)
+unbind -T copy-mode-vi Space
+bind -T copy-mode-vi v send -X begin-selection   # select (v)
+bind -T copy-mode-vi y send -X copy-pipe "xclip" # copy (y)
+
+# app
+bind ! splitw htop                                  # htop (prefix !)
+bind m command-prompt "splitw 'exec man %%'"        # man (prefix m)
+bind % command-prompt "splitw 'exec perldoc -t %%'" # perl doc (prefix %)
+bind / command-prompt "splitw 'exec ri %%'"         # ruby doc (prefix /)
+
+# reload config (prefix r)
+bind r source ~/.tmux.conf \; display "Configuration reloaded!"
+
+#-- statusbar --#
+set -g status-interval 1
+set -g status-keys vi
+
+setw -g mode-keys vi
+setw -g automatic-rename off
+
+#-- colorscheme --#
+# statusbar
+set -g status-justify right
+# set -g status-left ""
+# set -g status-right ""
+#左下角
+set -g status-left "#[bg=black,fg=green][#[fg=cyan]#S#[fg=green]]"
+set -g status-left-length 20
+set -g automatic-rename on
+set-window-option -g window-status-format '#[dim]#I:#[default]#W#[fg=grey,dim]'
+set-window-option -g window-status-current-format '#[fg=cyan,bold]#I#[fg=blue]:#[fg=cyan]#W#[fg=dim]'
+#右下角
+set -g status-right '#[fg=green][#[fg=cyan]%Y-%m-%d %H:%M:%S#[fg=green]]'
+
+# -- display -------------------------------------------------------------------
+
+set -g base-index 1           # start windows numbering at 1
+setw -g pane-base-index 1     # make pane numbering consistent with windows
+setw -g automatic-rename on   # rename window to reflect current program
+set -g renumber-windows on    # renumber windows when a window is closed
+set -g set-titles on          # set terminal title
+set -g display-panes-time 800 # slightly longer pane indicators display time
+set -g display-time 1000      # slightly longer status messages display time
+set -g status-interval 1     # redraw status line every 10 seconds
+
+set -g status-style "fg=#504945,bg=#282828"
+setw -g window-status-current-fg white
+setw -g window-status-current-bg red
+setw -g window-status-current-attr bright
+setw -g window-status-fg cyan
+setw -g window-status-bg default
+setw -g window-status-attr dim
+
+# window
+setw -g window-status-separator " "
+setw -g window-status-format "-"
+setw -g window-status-current-format "+"
+setw -g window-status-current-style "fg=#d79921,bg=#282828"
+
+# pane
+set -g pane-border-style "fg=#ebdbb2"
+set -g pane-active-border-style "fg=#d79921"
+
+#开启window事件提示
+setw -g monitor-activity on
+#set -g visual-activity on
+
+## 鼠标设置，不要打开，不然用鼠标选择不了内容
+set-option -g mouse on
+
+## =============================================================================
+## https://github.com/erikw/tmux-powerline
+set-option -g status on
+set-option -g status-interval 2
+set-option -g status-justify "centre"
+set-option -g status-left-length 60
+set-option -g status-right-length 150
+set-option -g status-left "#(~/Downloads/tmux-powerline/powerline.sh left)"
+set-option -g status-right "#(~/Downloads/tmux-powerline/powerline.sh right)"
+## =============================================================================
+
+```
+
