@@ -71,7 +71,8 @@ task :task do
     # ----------------------------------------------
   end
   ## system("rstudio #{filename}") # 新建文章后在编辑器中打开
-  system("subl #{filename}") # 新建文章后在编辑器中打开
+  #system("subl #{filename}") # 新建文章后在编辑器中打开
+  system("typora #{filename}") # 新建文章后在编辑器中打开
 end # task :task
 ## =============================================================================
 
